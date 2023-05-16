@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minesweeper/screens/screens.dart';
@@ -5,7 +6,10 @@ import 'package:minesweeper/services/game_notifier.dart';
 import 'package:minesweeper/support/theme.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   runApp(const MyApp());
 }
