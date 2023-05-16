@@ -16,6 +16,7 @@ class GameNotifier extends ChangeNotifier {
   int _seconds = 0;
   GameState _gameState = GameState.notStarted;
   List<List<GameTile>> _gameBoard = [];
+  Map<String, Object> _records = {};
 
   int get difficulty => _difficulty;
   int get boardHeight => _boardHeight;
@@ -23,8 +24,15 @@ class GameNotifier extends ChangeNotifier {
   int get flaggedTiles => _flaggedTiles;
   int get numberOfBombs => _numberOfBombs;
   String get time => formatTime();
+  int get timeInSeconds => _seconds;
   GameState get gameState => _gameState;
   List<List<GameTile>> get gameBoard => _gameBoard;
+  Map<String, Object> get records => _records;
+
+  set setRecords(Map<String, Object> records) {
+    _records = records;
+    notifyListeners();
+  }
 
   set setDifficulty(int difficulty) {
     _difficulty = difficulty;

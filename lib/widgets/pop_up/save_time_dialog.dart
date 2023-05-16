@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:minesweeper/services/database.dart';
 import 'package:minesweeper/support/theme.dart';
 
 class SaveTimeDialog extends StatelessWidget {
@@ -36,7 +37,7 @@ class SaveTimeDialog extends StatelessWidget {
         TextButton(
           child: const Text('Save'),
           onPressed: () async {
-            bool result = await _submit();
+            bool result = await _submit(context);
             if (result) Navigator.of(context).pop('Saved');
           },
         ),
@@ -61,7 +62,7 @@ class SaveTimeDialog extends StatelessWidget {
         CupertinoDialogAction(
           child: const Text('Save'),
           onPressed: () async {
-            bool result = await _submit();
+            bool result = await _submit(context);
             if (result) Navigator.of(context).pop('Saved');
           },
         ),
@@ -69,14 +70,16 @@ class SaveTimeDialog extends StatelessWidget {
     );
   }
 
-  Future<bool> _submit() async {
+  Future<bool> _submit(BuildContext context) async {
     if (!_formKey.currentState!.validate()) {
       return false;
     }
     _formKey.currentState!.save();
 
     // Save to database
-    return true;
+    bool result = await RecordsDatabase.writeRecord(context, _nameController.text.trim());
+
+    return result;
   }
 
   Widget _buildForm() {

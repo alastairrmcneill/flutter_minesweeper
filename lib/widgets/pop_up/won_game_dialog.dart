@@ -65,7 +65,21 @@ class WonGameDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GameNotifier gameNotifier = Provider.of<GameNotifier>(context, listen: false);
-    bool newRecordTime = true;
+
+    bool newRecordTime = false;
+
+    Map? data = gameNotifier.records['${gameNotifier.difficulty}'] as Map?;
+
+    if (data != null) {
+      int? recordTime = data['seconds'] as int?;
+
+      if (recordTime != null) {
+        if (gameNotifier.timeInSeconds < recordTime) {
+          newRecordTime = true;
+        }
+      }
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

@@ -44,7 +44,7 @@ class GameScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Padding(
+                            const Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Icon(FontAwesomeIcons.stopwatch),
                             ),
@@ -63,7 +63,7 @@ class GameScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Padding(
+                            const Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Icon(FontAwesomeIcons.bomb),
                             ),
@@ -79,22 +79,14 @@ class GameScreen extends StatelessWidget {
                   actions: [
                     IconButton(
                       onPressed: () => gameNotifier.startGame(difficulty: gameNotifier.difficulty),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.refresh_rounded,
                       ),
                     )
                   ],
                 ),
-                GameBoard(),
-                SizedBox(
-                  height: 40,
-                  child: Text(
-                    'World record: 1:34 by Ali',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+                const GameBoard(),
+                const SizedBox(height: 40, child: WorldRecordText()),
                 const Text(
                   'Tap to show tile.\nHold to flag tile.',
                   textAlign: TextAlign.center,

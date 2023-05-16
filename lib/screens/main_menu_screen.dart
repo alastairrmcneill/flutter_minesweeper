@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minesweeper/screens/screens.dart';
+import 'package:minesweeper/services/database.dart';
 import 'package:minesweeper/services/game_notifier.dart';
 import 'package:minesweeper/support/theme.dart';
 import 'package:minesweeper/widgets/text_divider.dart';
 import 'package:provider/provider.dart';
 
-class MainMenu extends StatelessWidget {
+class MainMenu extends StatefulWidget {
   const MainMenu({super.key});
+
+  @override
+  State<MainMenu> createState() => _MainMenuState();
+}
+
+class _MainMenuState extends State<MainMenu> {
+  @override
+  void initState() {
+    RecordsDatabase.read(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
